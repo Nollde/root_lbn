@@ -17,7 +17,7 @@
 # All the needed software is pinned in the `environment.yml` file.
 # It can be installed and sourced using [`conda`](https://docs.conda.io/en/latest/).
 
-# In[1]:
+# In[ ]:
 
 
 import itertools
@@ -35,7 +35,7 @@ from matplotlib import pyplot as plt
 TLorentzVectorArray = uproot_methods.classes.TLorentzVector.TLorentzVectorArray
 
 
-# In[2]:
+# In[ ]:
 
 
 assert tf.__version__.startswith("2")
@@ -46,7 +46,7 @@ assert tf.__version__.startswith("2")
 
 # Data shuffling:
 
-# In[3]:
+# In[ ]:
 
 
 def shuffle_together(*arrays):
@@ -58,7 +58,7 @@ def shuffle_together(*arrays):
 
 # We need some functions to handle uproot data formats and to convert `TLorentzVectors` consisting of the transverse momentum, the pseudorapidity, the phi angle and the mass to four vectors consisting of the energy and the three momentum.
 
-# In[5]:
+# In[ ]:
 
 
 def tree_to_lorentz(tree, name="Jet"):
@@ -83,7 +83,7 @@ def tree_to_array(tree, mask, name="Jet", n=4):
 
 # In this simple example we will select events with exactly one electron with transverse momentum greater than 25 GeV and equal or more than four jets:
 
-# In[6]:
+# In[ ]:
 
 
 def event_selection(tree):
@@ -95,7 +95,7 @@ def event_selection(tree):
 
 # Specification of low and high level input data. As low level inputs, we will use the four momenta of the four jets with the highest momentum, and the electron, as high level feature we will use the variable "MET_pt" which is defined on the event level:
 
-# In[14]:
+# In[ ]:
 
 
 def get_low_level(tree, mask):
@@ -111,7 +111,7 @@ def get_high_level(tree, mask, variables=["MET_pt"]):
 
 # Plotting a simple confusion matrix for the final classificaiton:
 
-# In[16]:
+# In[ ]:
 
 
 def plot_confusion_matrix(cm, class_names):
@@ -140,18 +140,17 @@ def plot_confusion_matrix(cm, class_names):
 # ## Data
 # Load data for signal and background:
 
-# In[17]:
+# In[ ]:
 
 
 DATA_PATH = "/eos/user/d/dnoll/HH/lbn/%s.root"
-DATA_PATH = "/net/scratch/dn801636/projects/root_to_lbn/data/%s.root"
 signal, background = uproot.open(DATA_PATH % "signal"), uproot.open(DATA_PATH % "background")
 signal_tree, background_tree = signal["Events"], background["Events"]
 
 
 # Create a boolean mask for the event selection:
 
-# In[10]:
+# In[ ]:
 
 
 signal_mask, background_mask = event_selection(signal_tree), event_selection(background_tree)
@@ -159,7 +158,7 @@ signal_mask, background_mask = event_selection(signal_tree), event_selection(bac
 
 # Get low and high level data, which will be used for the LBN and the following DNN respectively:
 
-# In[11]:
+# In[ ]:
 
 
 signal_ll, signal_hl = get_low_level(signal_tree, signal_mask), get_high_level(signal_tree, signal_mask)
@@ -168,7 +167,7 @@ background_ll, background_hl = get_low_level(background_tree, background_mask), 
 
 # Encode targets to one_hot vectors:
 
-# In[12]:
+# In[ ]:
 
 
 signal_targets = tf.keras.backend.one_hot(np.ones(signal_ll.shape[0]), 2)
@@ -181,7 +180,7 @@ background_targets = tf.keras.backend.one_hot(np.zeros(background_ll.shape[0]), 
 # We will use it in this example. Because the differences are already pretty large (factor ~10), our validation accuracy will fluctuate.
 # If the differences are to large, we have to crop the larger class or, as an even better approach, sample up the smaller class.
 
-# In[4]:
+# In[ ]:
 
 
 # n_signal = signal_ll.shape[0]
@@ -190,7 +189,7 @@ background_targets = tf.keras.backend.one_hot(np.zeros(background_ll.shape[0]), 
 
 # Concatenate and shuffle signal and background samples:
 
-# In[12]:
+# In[ ]:
 
 
 ll = np.concatenate([signal_ll, background_ll], axis=0).astype(np.float32)
@@ -202,7 +201,7 @@ ll, hl, targets = shuffle_together(ll, hl, targets)
 
 # Normalize high-level features:
 
-# In[13]:
+# In[ ]:
 
 
 hl_mean, hl_std = np.mean(hl, axis=0), np.std(hl, axis=0)
@@ -211,7 +210,7 @@ hl = (hl - hl_mean) / hl_std
 
 # Split the data, use 90% for training and 10% for validation:
 
-# In[14]:
+# In[ ]:
 
 
 n_data = ll.shape[0]
@@ -223,7 +222,7 @@ y_train, y_val = targets[:split], targets[split:]
 
 # Calculate the class weights:
 
-# In[15]:
+# In[ ]:
 
 
 i_targets = np.argmax(targets, axis=1)
@@ -235,7 +234,7 @@ class_weight = dict(enumerate(class_weight))
 # Now we set up the model with `tf.keras`.
 # First some general network parameters:
 
-# In[16]:
+# In[ ]:
 
 
 n_classes = 2
@@ -246,7 +245,7 @@ dropout = 0.1
 
 # We use the functional API, where we can feed two inputs:
 
-# In[17]:
+# In[ ]:
 
 
 ll_inputs = tf.keras.Input(shape=(5, 4))
@@ -255,7 +254,7 @@ hl_inputs = tf.keras.Input(shape=(1,))
 
 # Initialize the Lorentz Boost Network and use it as first layer of the network:
 
-# In[18]:
+# In[ ]:
 
 
 lbn_layer = LBNLayer(ll_inputs.shape, 10, boost_mode=LBN.PAIRS, features=["E", "pt", "eta", "phi", "m", "pair_cos"])
@@ -272,7 +271,7 @@ normalized_lbn_features = tf.keras.layers.BatchNormalization()(lbn_features)
 
 # Concatenate the normalized features from the LBN and the high level features:
 
-# In[19]:
+# In[ ]:
 
 
 x = tf.keras.layers.concatenate([normalized_lbn_features, hl_inputs])
@@ -280,7 +279,7 @@ x = tf.keras.layers.concatenate([normalized_lbn_features, hl_inputs])
 
 # Add the feed forward network constisting of some dense layers with dropout between the layers:
 
-# In[20]:
+# In[ ]:
 
 
 x = tf.keras.layers.Dense(n_nodes, activation=activation)(x)
@@ -292,7 +291,7 @@ outputs = tf.keras.layers.Dense(n_classes)(x)
 
 # Create and compile the model:
 
-# In[21]:
+# In[ ]:
 
 
 model = tf.keras.Model(inputs=[ll_inputs, hl_inputs], outputs=outputs, name='lbn_dnn')
@@ -305,7 +304,7 @@ model.compile(
 
 # Get a summary of the created model with the number of total trainable variables:
 
-# In[22]:
+# In[ ]:
 
 
 model.summary()
