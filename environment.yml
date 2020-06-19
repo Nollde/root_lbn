@@ -1,9 +1,7 @@
 name: root_lbn
 channels:
   - anaconda
-  - /net/scratch/cms/conda/envs/build/conda-bld
   - conda-forge
-  - defaults
 dependencies:
   - _libgcc_mutex=0.1=conda_forge
   - _openmp_mutex=4.5=0_gnu
@@ -176,5 +174,3 @@ dependencies:
     - pyqt5-sip==4.19.18
     - pyqtchart==5.12
     - pyqtwebengine==5.12.1
-prefix: /net/scratch/dn801636/conda/envs/root_lbn
-
