@@ -5,28 +5,28 @@ channels:
 dependencies:
   - _libgcc_mutex=0.1=conda_forge
   - _openmp_mutex=4.5=0_gnu
-  - _tflow_select=2.3.0=mkl
+  - _tflow_select=2.1.0=gpu
   - absl-py=0.9.0=py36_0
   - astunparse=1.6.3=py_0
-  - attrs=19.3.0=py_0
   - awkward=0.12.21=pyh9f0ad1d_0
-  - backcall=0.1.0=py_0
-  - blas=2.14=openblas
-  - bleach=3.1.5=pyh9f0ad1d_0
+  - backcall=0.2.0=pyh9f0ad1d_0
+  - blas=1.0=mkl
   - blinker=1.4=py36_0
-  - brotlipy=0.7.0=py36h8c4c3a4_1000
+  - brotlipy=0.7.0=py36h7b6447c_1000
   - c-ares=1.15.0=h7b6447c_1001
-  - ca-certificates=2020.4.5.2=hecda079_0
+  - ca-certificates=2020.6.20=hecda079_0
   - cachetools=4.1.0=py_1
-  - certifi=2020.4.5.2=py36h9f0ad1d_0
-  - cffi=1.14.0=py36hd463f26_0
-  - chardet=3.0.4=py36h9f0ad1d_1006
+  - certifi=2020.6.20=py36h9f0ad1d_0
+  - cffi=1.14.0=py36h2e261b9_0
+  - chardet=3.0.4=py36_1003
   - click=7.1.2=py_0
-  - cryptography=2.9.2=py36h45558ae_0
+  - cryptography=2.9.2=py36h1ba5d50_0
+  - cudatoolkit=10.1.243=h6bb024c_0
+  - cudnn=7.6.5=cuda10.1_0
+  - cupti=10.1.168=0
   - cycler=0.10.0=py_2
   - dbus=1.13.6=he372182_0
   - decorator=4.4.2=py_0
-  - defusedxml=0.6.0=py_0
   - entrypoints=0.3=py36h9f0ad1d_1001
   - expat=2.2.9=he1b5a44_2
   - fontconfig=2.13.1=h86ecdb6_1001
@@ -44,36 +44,30 @@ dependencies:
   - hdf5=1.10.4=hb1b8bf9_0
   - icu=64.2=he1b5a44_1
   - idna=2.9=py_1
-  - importlib-metadata=1.6.1=py36h9f0ad1d_0
-  - importlib_metadata=1.6.1=0
-  - ipykernel=5.1.4=py36h39e3cac_0
+  - intel-openmp=2020.1=217
+  - ipykernel=5.3.0=py36h95af2a2_0
   - ipython=7.15.0=py36h9f0ad1d_0
   - ipython_genutils=0.2.0=py_1
-  - jedi=0.17.0=py36h9f0ad1d_0
-  - jinja2=2.11.2=pyh9f0ad1d_0
+  - jedi=0.17.1=py36h9f0ad1d_0
   - joblib=0.15.1=py_0
   - jpeg=9d=h516909a_0
-  - jsonschema=3.2.0=py36h9f0ad1d_1
   - jupyter_client=6.1.3=py_0
   - jupyter_core=4.6.3=py36h9f0ad1d_1
   - keras-preprocessing=1.1.0=py_1
   - kiwisolver=1.2.0=py36hdb11119_0
   - krb5=1.17.1=h2fd8d38_0
   - ld_impl_linux-64=2.34=h53a641e_5
-  - libblas=3.8.0=14_openblas
-  - libcblas=3.8.0=14_openblas
+  - libblas=3.8.0=14_mkl
+  - libcblas=3.8.0=14_mkl
   - libclang=9.0.1=default_hde54327_0
   - libcurl=7.69.1=hf7181ac_0
   - libedit=3.1.20191231=h46ee950_0
   - libffi=3.2.1=he1b5a44_1007
   - libgcc-ng=9.2.0=h24d8f2e_2
-  - libgfortran-ng=7.5.0=hdf63c60_6
+  - libgfortran-ng=7.3.0=hdf63c60_0
   - libgomp=9.2.0=h24d8f2e_2
   - libiconv=1.15=h516909a_1006
-  - liblapack=3.8.0=14_openblas
-  - liblapacke=3.8.0=14_openblas
   - libllvm9=9.0.1=he513fc3_1
-  - libopenblas=0.3.7=h5ec1e0e_6
   - libpng=1.6.37=hed695b0_1
   - libprotobuf=3.12.3=hd408876_0
   - libsodium=1.0.17=h516909a_0
@@ -86,32 +80,26 @@ dependencies:
   - lz4=3.1.0=py36hd35f07f_0
   - lz4-c=1.9.2=he1b5a44_1
   - markdown=3.1.1=py36_0
-  - markupsafe=1.1.1=py36h8c4c3a4_1
-  - matplotlib=3.2.1=0
-  - matplotlib-base=3.2.1=py36hb8e4980_0
-  - mistune=0.8.4=py36h8c4c3a4_1001
-  - nb_conda=2.2.1=py36_2
-  - nb_conda_kernels=2.2.3=py36_0
-  - nbconvert=5.6.1=py36h9f0ad1d_1
-  - nbformat=5.0.6=py_0
+  - matplotlib=3.2.2=0
+  - matplotlib-base=3.2.2=py36hb8e4980_0
+  - mkl=2019.4=243
+  - mkl-service=2.3.0=py36he904b0f_0
+  - mkl_fft=1.1.0=py36h23d657b_0
+  - mkl_random=1.1.0=py36hd6b4f25_0
   - ncurses=6.1=hf484d3e_1002
-  - notebook=6.0.3=py36h9f0ad1d_0
   - nspr=4.25=he1b5a44_0
   - nss=3.47=he751ad9_0
-  - numpy=1.18.5=py36h7314795_0
+  - numpy=1.18.1=py36h4f9e942_0
+  - numpy-base=1.18.1=py36hde5b4d6_1
   - oauthlib=3.1.0=py_0
   - openssl=1.1.1g=h516909a_0
   - opt_einsum=3.1.0=py_0
-  - packaging=20.4=pyh9f0ad1d_0
-  - pandoc=2.9.2.1=0
-  - pandocfilters=1.4.2=py_1
   - parso=0.7.0=pyh9f0ad1d_0
   - pcre=8.44=he1b5a44_0
   - pexpect=4.8.0=py36h9f0ad1d_1
   - pickleshare=0.7.5=py36h9f0ad1d_1001
   - pip=20.1.1=py_1
-  - prometheus_client=0.8.0=pyh9f0ad1d_0
-  - prompt-toolkit=3.0.5=py_0
+  - prompt-toolkit=3.0.5=py_1
   - protobuf=3.12.3=py36he6710b0_0
   - pthread-stubs=0.4=h14c3975_1001
   - ptyprocess=0.6.0=py_1001
@@ -120,11 +108,10 @@ dependencies:
   - pycparser=2.20=py_0
   - pygments=2.6.1=py_0
   - pyjwt=1.7.1=py36_0
-  - pyopenssl=19.1.0=py_1
+  - pyopenssl=19.1.0=py36_0
   - pyparsing=2.4.7=pyh9f0ad1d_0
   - pyqt=5.12.3=py36haa643ae_3
-  - pyrsistent=0.16.0=py36h8c4c3a4_0
-  - pysocks=1.7.1=py36h9f0ad1d_1
+  - pysocks=1.7.1=py36_0
   - python=3.6.10=h8356626_1011_cpython
   - python-dateutil=2.8.1=py_0
   - python-xxhash=1.4.3=py36h8c4c3a4_1
@@ -132,23 +119,22 @@ dependencies:
   - pyzmq=19.0.1=py36h9947dbf_0
   - qt=5.12.5=hd8c4c69_1
   - readline=8.0=hf8c457e_0
-  - requests=2.23.0=pyh8c360ce_2
+  - requests=2.23.0=py36_0
   - requests-oauthlib=1.3.0=py_0
   - rsa=4.0=py_0
-  - scikit-learn=0.22.1=py36h22eb022_0
-  - scipy=1.4.1=py36h2d22cac_3
-  - send2trash=1.5.0=py_0
-  - setuptools=47.3.0=py36h9f0ad1d_0
-  - six=1.15.0=pyh9f0ad1d_0
+  - scikit-learn=0.23.1=py36h0e1014b_0
+  - scipy=1.4.1=py36h0b6359f_0
+  - setuptools=47.3.1=py36h9f0ad1d_0
+  - six=1.15.0=py_0
   - sqlite=3.30.1=hcee41ef_0
   - tensorboard=2.2.1=pyh532a8cf_0
   - tensorboard-plugin-wit=1.6.0=py_0
-  - tensorflow=2.2.0=mkl_py36h5a57954_0
-  - tensorflow-base=2.2.0=mkl_py36hd506778_0
+  - tensorflow=2.2.0=gpu_py36hf933387_0
+  - tensorflow-base=2.2.0=gpu_py36h8a81be8_0
   - tensorflow-estimator=2.2.0=pyh208ff02_0
+  - tensorflow-gpu=2.2.0=h0d30ee6_0
   - termcolor=1.1.0=py36_1
-  - terminado=0.8.3=py36h9f0ad1d_1
-  - testpath=0.4.4=py_0
+  - threadpoolctl=2.1.0=pyh5ca1d4c_0
   - tk=8.6.10=hed695b0_0
   - tornado=6.0.4=py36h8c4c3a4_1
   - traitlets=4.3.3=py36h9f0ad1d_1
@@ -157,7 +143,6 @@ dependencies:
   - uproot-methods=0.7.4=pyh9f0ad1d_0
   - urllib3=1.25.9=py_0
   - wcwidth=0.2.4=pyh9f0ad1d_0
-  - webencodings=0.5.1=py_1
   - werkzeug=1.0.1=py_0
   - wheel=0.34.2=py_1
   - wrapt=1.12.1=py36h7b6447c_1
@@ -166,7 +151,6 @@ dependencies:
   - xrootd=4.12.3=py36h7204e8b_0
   - xz=5.2.5=h516909a_0
   - zeromq=4.3.2=he1b5a44_2
-  - zipp=3.1.0=py_0
   - zlib=1.2.11=h516909a_1006
   - zstandard=0.14.0=py36h831f99a_0
   - pip:
