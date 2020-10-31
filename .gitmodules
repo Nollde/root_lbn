@@ -1,0 +1,3 @@
+[submodule "tools"]
+	path = tools
+	url = https://git.rwth-aachen.de/3pia/cms_analyses/tools.git
